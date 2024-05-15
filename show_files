@@ -1,0 +1,6 @@
+#!/bin/bash
+echo idf_component_register\(SRCS
+find main -name "*.c*" | sed 's/^main\//"/;s/$/"/'
+echo INCLUDE_DIRS \".\"
+ls -d main/*/ | sed 's/^main\//"/;s/\/$/"/'
+echo \)

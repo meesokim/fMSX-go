@@ -1,0 +1,16 @@
+idf_component_register(SRCS 
+"Audio.c"
+"files.c"
+"LibOdroidGo.c"
+"Menu.c"
+INCLUDE_DIRS "."
+"../EMULib"
+"../Z80"
+"../fMSX"
+"../minIni"
+"../odroid-go-common"
+"../odroidGo"
+"../ugui"
+"../utils"
+"../video"
+)
