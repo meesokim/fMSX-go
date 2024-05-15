@@ -144,7 +144,7 @@ int32_t odroid_settings_VRef_get()
 	err = nvs_get_i32(my_handle, NvsKey_VRef, &result);
 	if (err == ESP_OK)
     {
-        printf("odroid_settings_VRefGet: value=%d\n", result);
+        printf("odroid_settings_VRefGet: value=%ld\n", result);
 	}
 
 
@@ -173,7 +173,7 @@ void odroid_settings_VRef_set(int32_t value)
 int32_t odroid_settings_Volume_get()
 {
     STOP_DISPLAY_FUNCTION();
-    int result = ODROID_VOLUME_LEVEL3;
+    int32_t result = ODROID_VOLUME_LEVEL3;
 
     // Open
     nvs_handle my_handle;
@@ -184,7 +184,7 @@ int32_t odroid_settings_Volume_get()
     err = nvs_get_i32(my_handle, NvsKey_Volume, &result);
     if (err == ESP_OK)
     {
-        printf("odroid_settings_Volume_get: value=%d\n", result);
+        printf("odroid_settings_Volume_get: value=%ld\n", result);
     }
 
     // Close
@@ -273,7 +273,7 @@ int32_t odroid_settings_AppSlot_get()
 	err = nvs_get_i32(my_handle, NvsKey_AppSlot, &result);
 	if (err == ESP_OK)
     {
-        printf("odroid_settings_AppSlot_get: value=%d\n", result);
+        printf("odroid_settings_AppSlot_get: value=%ld\n", result);
 	}
 
 
@@ -315,7 +315,7 @@ int32_t odroid_settings_DataSlot_get()
 	err = nvs_get_i32(my_handle, NvsKey_DataSlot, &result);
 	if (err == ESP_OK)
     {
-        printf("odroid_settings_DataSlot_get: value=%d\n", result);
+        printf("odroid_settings_DataSlot_get: value=%ld\n", result);
 	}
 
 
@@ -346,7 +346,7 @@ int32_t odroid_settings_Backlight_get()
 {
     STOP_DISPLAY_FUNCTION();
     // TODO: Move to header
-    int result = 2;
+    int32_t result = 2;
 
     // Open
     nvs_handle my_handle;
@@ -357,7 +357,7 @@ int32_t odroid_settings_Backlight_get()
     err = nvs_get_i32(my_handle, NvsKey_Backlight, &result);
     if (err == ESP_OK)
     {
-        printf("odroid_settings_Backlight_get: value=%d\n", result);
+        printf("odroid_settings_Backlight_get: value=%ld\n", result);
     }
 
     // Close
@@ -386,7 +386,7 @@ void odroid_settings_Backlight_set(int32_t value)
 ODROID_START_ACTION odroid_settings_StartAction_get()
 {
     STOP_DISPLAY_FUNCTION();
-    int result = 0;
+    int32_t result = 0;
 
     // Open
     nvs_handle my_handle;
@@ -397,7 +397,7 @@ ODROID_START_ACTION odroid_settings_StartAction_get()
     err = nvs_get_i32(my_handle, NvsKey_StartAction, &result);
     if (err == ESP_OK)
     {
-        printf("%s: value=%d\n", __func__, result);
+        printf("%s: value=%ld\n", __func__, result);
     }
 
     // Close
@@ -426,7 +426,7 @@ void odroid_settings_StartAction_set(ODROID_START_ACTION value)
 uint8_t odroid_settings_ScaleDisabled_get(ODROID_SCALE_DISABLE system)
 {
     STOP_DISPLAY_FUNCTION();
-    int result = 0;
+    int32_t result = 0;
 
     // Open
     nvs_handle my_handle;
@@ -437,7 +437,7 @@ uint8_t odroid_settings_ScaleDisabled_get(ODROID_SCALE_DISABLE system)
     err = nvs_get_i32(my_handle, NvsKey_ScaleDisabled, &result);
     if (err == ESP_OK)
     {
-        printf("%s: result=%d\n", __func__, result);
+        printf("%s: result=%ld\n", __func__, result);
     }
 
     // Close
@@ -455,11 +455,11 @@ void odroid_settings_ScaleDisabled_set(ODROID_SCALE_DISABLE system, uint8_t valu
     if (err != ESP_OK) abort();
 
 	// Read
-	int result = 0;
+	int32_t result = 0;
 	err = nvs_get_i32(my_handle, NvsKey_ScaleDisabled, &result);
 	if (err == ESP_OK)
 	{
-		printf("%s: result=%d\n", __func__, result);
+		printf("%s: result=%ld\n", __func__, result);
 	}
 
 	// set system flag
@@ -467,7 +467,7 @@ void odroid_settings_ScaleDisabled_set(ODROID_SCALE_DISABLE system, uint8_t valu
 	result &= ~system;
 	//printf("%s: result=%d\n", __func__, result);
 	result |= (system & (value ? 0xffffffff : 0));
-	printf("%s: set result=%d\n", __func__, result);
+	printf("%s: set result=%ld\n", __func__, result);
 
     // Write
     err = nvs_set_i32(my_handle, NvsKey_ScaleDisabled, result);
@@ -482,7 +482,7 @@ void odroid_settings_ScaleDisabled_set(ODROID_SCALE_DISABLE system, uint8_t valu
 ODROID_AUDIO_SINK odroid_settings_AudioSink_get()
 {
     STOP_DISPLAY_FUNCTION();
-    int result = ODROID_AUDIO_SINK_SPEAKER;
+    int32_t result = ODROID_AUDIO_SINK_SPEAKER;
 
     // Open
     nvs_handle my_handle;
@@ -493,7 +493,7 @@ ODROID_AUDIO_SINK odroid_settings_AudioSink_get()
     err = nvs_get_i32(my_handle, NvsKey_AudioSink, &result);
     if (err == ESP_OK)
     {
-        printf("%s: value=%d\n", __func__, result);
+        printf("%s: value=%ld\n", __func__, result);
     }
 
     // Close
@@ -539,7 +539,7 @@ void odroid_settings_WLAN_set(ODROID_WLAN_TYPE value)
 ODROID_WLAN_TYPE odroid_settings_WLAN_get()
 {
     STOP_DISPLAY_FUNCTION();
-    int result = ODROID_WLAN_NONE;
+    int32_t result = ODROID_WLAN_NONE;
 
     // Open
     nvs_handle my_handle;
@@ -550,7 +550,7 @@ ODROID_WLAN_TYPE odroid_settings_WLAN_get()
     err = nvs_get_i32(my_handle, NvsKey_WLANtype, &result);
     if (err == ESP_OK)
     {
-        printf("%s: value=%d\n", __func__, result);
+        printf("%s: value=%ld\n", __func__, result);
     }
 
     // Close

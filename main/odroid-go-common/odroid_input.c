@@ -275,9 +275,10 @@ void odroid_input_gamepad_init()
     gpio_set_direction(ODROID_GAMEPAD_IO_B, GPIO_MODE_INPUT);
 	gpio_set_pull_mode(ODROID_GAMEPAD_IO_B, GPIO_PULLUP_ONLY);
 
-	adc1_config_width(ADC_WIDTH_12Bit);
-    adc1_config_channel_atten(ODROID_GAMEPAD_IO_X, ADC_ATTEN_11db);
-	adc1_config_channel_atten(ODROID_GAMEPAD_IO_Y, ADC_ATTEN_11db);
+	// adc1_config_width(ADC_WIDTH_12Bit);
+	adc1_config_width(ADC_WIDTH_MAX);
+    adc1_config_channel_atten(ODROID_GAMEPAD_IO_X, ADC_ATTEN_DB_6);
+	adc1_config_channel_atten(ODROID_GAMEPAD_IO_Y, ADC_ATTEN_DB_6);
 
 	gpio_set_direction(ODROID_GAMEPAD_IO_MENU, GPIO_MODE_INPUT);
 	gpio_set_pull_mode(ODROID_GAMEPAD_IO_MENU, GPIO_PULLUP_ONLY);
@@ -354,8 +355,9 @@ static void print_char_val_type(esp_adc_cal_value_t val_type)
 #define DEFAULT_VREF 1100
 void odroid_input_battery_level_init()
 {
-    adc1_config_width(ADC_WIDTH_12Bit);
-    adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_11db);
+    // adc1_config_width(ADC_WIDTH_12Bit);
+    adc1_config_width(ADC_WIDTH_MAX);
+    adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_DB_6);
 
     //int vref_value = odroid_settings_VRef_get();
     //esp_adc_cal_get_characteristics(vref_value, ADC_ATTEN_11db, ADC_WIDTH_12Bit, &characteristics);

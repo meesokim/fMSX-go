@@ -41,7 +41,9 @@ esp_err_t odroid_sdcard_open(const char* base_path)
     	//host.max_freq_khz = SDMMC_FREQ_HIGHSPEED; //10000000;
         host.max_freq_khz = SDMMC_FREQ_DEFAULT;
 
-    	sdspi_slot_config_t slot_config = SDSPI_SLOT_CONFIG_DEFAULT();
+    	// sdspi_slot_config_t slot_config = SDSPI_SLOT_CONFIG_DEFAULT();
+        
+    	sdmmc_slot_config_t slot_config = SDMMC_SLOT_CONFIG_DEFAULT();
     	slot_config.gpio_miso = (gpio_num_t)SD_PIN_NUM_MISO;
     	slot_config.gpio_mosi = (gpio_num_t)SD_PIN_NUM_MOSI;
     	slot_config.gpio_sck  = (gpio_num_t)SD_PIN_NUM_CLK;
@@ -183,7 +185,7 @@ char* odroid_sdcard_create_savefile_path(const char* base_path, const char* file
     //printf("%s: base_path='%s', fileName='%s'\n", __func__, base_path, fileName);
 
     // Determine folder
-    char* extension = fileName + strlen(fileName); // place at NULL terminator
+    const char* extension = fileName + strlen(fileName); // place at NULL terminator
     while (extension != fileName)
     {
         if (*extension == '.')

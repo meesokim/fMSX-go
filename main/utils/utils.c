@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <sys/dirent.h>
 
+#include "LibOdroidGo.h"
 
 #define SHA_ROM_TYPES 754
 struct shaRomType {
@@ -803,7 +804,7 @@ int getRomType(const char* sha) {
 int fileExist(const char* fileName) {
     FILE* F;
     if(!(F=_fopen(fileName,"rb"))) return(0);
-    close(F);
+    fclose(F);
     return(1);
 }
 

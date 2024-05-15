@@ -147,7 +147,7 @@ DRAM_ATTR static const ili_init_cmd_t ili_init_cmds[] = {
 static uint16_t* line_buffer_get()
 {
     uint16_t* buffer;
-    if (xQueueReceive(line_buffer_queue, &buffer, 1000 / portTICK_RATE_MS) != pdTRUE)
+    if (xQueueReceive(line_buffer_queue, &buffer, 1000 / portTICK_PERIOD_MS) != pdTRUE)
     {
         abort();
     }
@@ -157,7 +157,7 @@ static uint16_t* line_buffer_get()
 
 void line_buffer_put(uint16_t* buffer)
 {
-    if (xQueueSend(line_buffer_queue, &buffer, 1000 / portTICK_RATE_MS) != pdTRUE)
+    if (xQueueSend(line_buffer_queue, &buffer, 1000 / portTICK_PERIOD_MS) != pdTRUE)
     {
         abort();
     }
@@ -340,7 +340,7 @@ static void ili_init()
 
         if (ili_init_cmds[cmd].databytes & 0x80)
         {
-            vTaskDelay(100 / portTICK_RATE_MS);
+            vTaskDelay(100 / portTICK_PERIOD_MS);
         }
 
         cmd++;
@@ -365,7 +365,7 @@ void send_reset_drawing(int left, int top, int width, int height)
 
 // static void wait_for_line_buffer()
 // {
-//     // if(xSemaphoreTake(line_semaphore, 1000 / portTICK_RATE_MS) != pdTRUE )
+//     // if(xSemaphoreTake(line_semaphore, 1000 / portTICK_PERIOD_MS) != pdTRUE )
 //     // {
 //     //     abort();
 //     // }
@@ -373,7 +373,7 @@ void send_reset_drawing(int left, int top, int width, int height)
 
 void send_continue_wait()
 {
-    if(xSemaphoreTake(spi_empty, 1000 / portTICK_RATE_MS) != pdTRUE )
+    if(xSemaphoreTake(spi_empty, 1000 / portTICK_PERIOD_MS) != pdTRUE )
     {
         abort();
     }
@@ -420,7 +420,7 @@ static void backlight_init()
     ledc_timer_config_t ledc_timer;
     memset(&ledc_timer, 0, sizeof(ledc_timer));
 
-    ledc_timer.bit_num = LEDC_TIMER_13_BIT; //set timer counter bit number
+    // ledc_timer.bit_num = LEDC_TIMER_13_BIT; //set timer counter bit number
     ledc_timer.freq_hz = 5000;              //set frequency of pwm
     ledc_timer.speed_mode = LEDC_LOW_SPEED_MODE;   //timer mode,
     ledc_timer.timer_num = LEDC_TIMER_0;    //timer index
@@ -761,7 +761,7 @@ void ili9341_poweroff()
         ili_data(ili_sleep_cmds[cmd].data, ili_sleep_cmds[cmd].databytes & 0x7f);
         if (ili_sleep_cmds[cmd].databytes & 0x80)
         {
-            vTaskDelay(100 / portTICK_RATE_MS);
+            vTaskDelay(100 / portTICK_PERIOD_MS);
         }
         cmd++;
     }
@@ -1439,7 +1439,7 @@ void odroid_display_show_splash()
 
 void odroid_display_drain_spi()
 {
-    // if(xSemaphoreTake(spi_empty, 1000 / portTICK_RATE_MS) != pdTRUE )
+    // if(xSemaphoreTake(spi_empty, 1000 / portTICK_PERIOD_MS) != pdTRUE )
     // {
     //     abort();
     // }
@@ -1485,7 +1485,7 @@ void odroid_display_lock_gb_display()
         if (!gb_mutex) abort();
     }
 
-    if (xSemaphoreTake(gb_mutex, 1000 / portTICK_RATE_MS) != pdTRUE)
+    if (xSemaphoreTake(gb_mutex, 1000 / portTICK_PERIOD_MS) != pdTRUE)
     {
         abort();
     }
@@ -1508,7 +1508,7 @@ void odroid_display_lock_msx_display()
         if (!msx_mutex) abort();
     }
 
-    if (xSemaphoreTake(msx_mutex, 1000 / portTICK_RATE_MS) != pdTRUE)
+    if (xSemaphoreTake(msx_mutex, 1000 / portTICK_PERIOD_MS) != pdTRUE)
     {
         abort();
     }
@@ -1543,7 +1543,7 @@ void odroid_display_lock_nes_display()
         if (!nes_mutex) abort();
     }
 
-    if (xSemaphoreTake(nes_mutex, 1000 / portTICK_RATE_MS) != pdTRUE)
+    if (xSemaphoreTake(nes_mutex, 1000 / portTICK_PERIOD_MS) != pdTRUE)
     {
         abort();
     }
@@ -1567,7 +1567,7 @@ void odroid_display_lock_sms_display()
         if (!sms_mutex) abort();
     }
 
-    if (xSemaphoreTake(sms_mutex, 1000 / portTICK_RATE_MS) != pdTRUE)
+    if (xSemaphoreTake(sms_mutex, 1000 / portTICK_PERIOD_MS) != pdTRUE)
     {
         abort();
     }

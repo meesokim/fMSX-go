@@ -65,7 +65,8 @@ void odroid_audio_init(ODROID_AUDIO_SINK sink, int sample_rate)
             .sample_rate = audio_sample_rate,
             .bits_per_sample = 16,
             .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,                           //2-channels
-            .communication_format = I2S_COMM_FORMAT_I2S_MSB,
+            // .communication_format = I2S_COMM_FORMAT_I2S_MSB,
+            .communication_format = I2S_COMM_FORMAT_STAND_I2S,
             //.communication_format = I2S_COMM_FORMAT_PCM,
             .dma_buf_count = 6,
             //.dma_buf_len = 1472 / 2,  // (368samples * 2ch * 2(short)) = 1472
